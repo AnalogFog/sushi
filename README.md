@@ -1,11 +1,6 @@
 # sushi
 Tooling to automate new device onboarding. 
 
-## Shell
-Initial efforts will produce a shell script which will check the user's underlying system architecture and install packages based on that.
-
-The primary target OS will be EndeavourOS, but any ARCH based Linux distribution should work fine. 
-
 ### Target Applications/Tools
 - Minecraft
 - Obsidian
@@ -20,6 +15,12 @@ The primary target OS will be EndeavourOS, but any ARCH based Linux distribution
 - Gpodder / Quod Libet
 - Element
 
+
+## Shell
+Initial efforts will produce a shell script which will check the user's underlying system architecture and install packages based on that.
+
+The primary target OS will be EndeavourOS, but any ARCH based Linux distribution should work fine. 
+
 ## Ansible
-The primary goal will be to setup an Ansible server and get this working in a playbook to keep all packages running at the lates versions. 
-I'd like to automate as much as the configuration of each tool as well. Like adding the Java OpenJDK to the system PATH. 
+The primary goal will be to setup an Ansible server and get this working in a playbook to keep all packages running at the latest versions. 
+I'd like to automate as much of the configuration of each tool as well. Like adding the Java OpenJDK to the system PATH. 
