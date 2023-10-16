@@ -23,16 +23,22 @@ else
 fi
 }
 
+function flatpak {
+##Check for flatpak
+	if pacman -Q | grep flatpak >/dev/null 2>&1; then
+		echo "Flatpak already installed"
+        else
+		sudo pacman -S flatpak
+		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	fi
+}
+
 #Obsidian Install
 function obsidian {
+
 	if pacman -Q | grep obsidian >/dev/null 2>&1; then
 		echo "Obsidian already installed" 
-	else 
-		if pacman -Q | grep flatpak >/dev/null 2>&1; then
-			sudo pacman -S flatpak
-			flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-		fi
-
+        else
 		flatpak install flathub md.obsidian.Obsidian
 		#sudo pacman -S obsidian
 	fi
@@ -41,10 +47,10 @@ function obsidian {
 #VS Code Install
 function vscode {
 #https://www.makeuseof.com/install-visual-studio-code-on-arch-linux/
-	if pacman -Q | grep  visual-studio-code-bin 2>&1; then
+        if pacman -Q | grep  visual-studio-code-bin 2>&1; 
 		echo "VS Code is already installed" 
 	else
-		sudo yay -S visual-studio-code-bin
+		yay -S visual-studio-code-bin
 	fi
 }
 
