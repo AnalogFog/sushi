@@ -41,17 +41,44 @@ function obsidian {
         else
 		flatpak install flathub md.obsidian.Obsidian
 		#sudo pacman -S obsidian
+		echo "Run Obisidian: flatpak run md.obsidian.Obsidian"
 	fi
 }
 
 #VS Code Install
 function vscode {
 #https://www.makeuseof.com/install-visual-studio-code-on-arch-linux/
-        if pacman -Q | grep  visual-studio-code-bin 2>&1; 
+if pacman -Q | grep  visual-studio-code-bin 2>&1; then 
 		echo "VS Code is already installed" 
 	else
 		yay -S visual-studio-code-bin
 	fi
+}
+
+function azul21 {
+if [ -d "$HOME/bin/zulu21" ]; then
+	echo "Zulu21 looks to be installed in $HOME/bin/zulu21"
+else
+	# Download the local Zulu tar for the specific CPU ARCH.
+	
+
+	# Extract the Zulu 21 tar. 
+	tar xzfv $HOME/bin/zulu21jdk-aarch64.tar.gz -C $HOME/bin/
+	mv $HOME/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64 $HOME/bin/zulu21
+
+	# Check if the Azul Zulu 21 tar was in $HOME/bin
+	#if [ -f "$HOME/bin/zulu21jdk-aarch64.tar.gz"; then 
+	#       echo 	
+
+
+	# Check for PATH update
+	if grep -q "zulu21/bin" "$HOME/.bashrc"; then
+		echo "Zulu21 already added to bashrc and PATH"
+	else
+	        echo "#Add Zulu21 JDK to PTH"
+	        echo 'export PATH="$PATH:$HOME/bin/zulu21/bin"' >> ~/.bashrc
+	fi
+fi
 }
 
 function jetbrains {
@@ -62,7 +89,8 @@ function jetbrains {
 	if pacman -Q | grep intellij-idea-community-edition 2>&1; then
 		echo "IntelliJ already installed"
 	else		
-		sudo pacman -S intellij-idea-community-edition
+		#sudo pacman -S intellij-idea-community-edition
+		yay -S intellij-idea-community-edition-no-jre
 	fi
 
 	# Auto install plugins
@@ -114,11 +142,13 @@ function install-s {
 ###############################
 #
 
-install-s "Sublime Text" "sublime"
-install-s "VS Code" "vscode"
-install-s "JetBrains IntelliJ Community Edition" "jetbrains"
-install-s "Minecraft Launcher" "minecraft"
-install-s "Obsidian" "obsidian"
+#flatpak
+install-s "Zulu-21 JDK" "azul21"
+#install-s "Sublime Text" "sublime"
+#install-s "VS Code" "vscode"
+#install-s "JetBrains IntelliJ Community Edition" "jetbrains"
+#install-s "Minecraft Launcher" "minecraft"
+#install-s "Obsidian" "obsidian"
 
 #sublime
 #vscode
