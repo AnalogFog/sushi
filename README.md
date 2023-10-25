@@ -1,5 +1,5 @@
 # sushi
-Helpful tool to automate new device onboarding arch systems on both `x86_64` and aarch64. 
+Helpful tool to automate new device onboarding for arch systems on both `x86_64` and `aarch64`. 
 
 | Tool/Setting | Tested On|
 | ---- | ------|
