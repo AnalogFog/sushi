@@ -1,13 +1,20 @@
 # sushi
-Tooling to automate new device onboarding. 
+Helpful tool to automate new device onboarding arch systems on both `x86_64` and aarch64. 
 
-### Target Applications/Tools
-- Minecraft
-- Obsidian
-- VSCode
-- Jetbrains IntelliJ
-- Sublime Text
-- Zulu 21 OpenJDK
+| Tool/Setting | Tested On|
+| ---- | ------|
+| git config | x86 |
+| SSH Key setup | x86 |
+| Minecraft Launcher | x86 | 
+| Flatpak | x86 | 
+| Obsidian | x86 |
+| VS Code | x86 |
+| Zulu JDK  21 | x86 | 
+| JetBrains IntelliJ | x86 | 
+| Sublime Text | x86 |
+
+
+### Applications/Tools Still Pending
 - RVM / Ruby
 - Reverse touchpad Autoscroll
 - Autosign in system settings
