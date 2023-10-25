@@ -12,13 +12,13 @@ Helpful tool to automate new device onboarding for arch systems on both `x86_64`
 | Zulu JDK  21 | x86 | 
 | JetBrains IntelliJ | x86 | 
 | Sublime Text | x86 |
+| Thunderbird Email Client | x86 |
 
 
 ### Applications/Tools Still Pending
 - RVM / Ruby
 - Reverse touchpad Autoscroll
 - Autosign in system settings
-- Thunderbird Email
 - Gpodder / Quod Libet
 - Element
 
