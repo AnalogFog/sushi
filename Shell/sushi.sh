@@ -35,8 +35,9 @@ else
 		echo "Installing Prism launcher for X86_64"
 		#cd /opt/prism
 		#https://github.com/PrismLauncher/PrismLauncher/releases/download/7.2/PrismLauncher-Linux-7.2.tar.gz /opt/prism
-		git clone https://github.com/PrismLauncher/PrismLauncher.git /opt/prism
+		#git clone https://github.com/PrismLauncher/PrismLauncher.git /opt/prism
 		#tar xzfv /opt/prism/PrismLauncher-Linux-7.2.tar.gz
+		yay -s prismlauncher
 	elif [ "$arch" = "aarch64" ]; then
 		#cd /opt/prism
 		git clone https://github.com/Kichura/Minecraft_ARM.git /opt/prism
@@ -148,6 +149,11 @@ else
 fi
 }
 
+function thunderbird {
+	echo "Install Thunderbird Email client"
+	sudo pacman -S thunderbird
+}
+
 ## Install Function ##
 function install-s {
 	pname="$1"
@@ -189,3 +195,4 @@ install-s "JetBrains IntelliJ Community Edition" "jetbrains"
 
 install-s "Sublime Text" "sublime"
 
+install-s "Thunderbird Email Client" "thunderbird"
