@@ -3,6 +3,27 @@
 ### Setup ###
 arch=$(uname -m)
 
+#RSA Key
+function rsa {
+if [ -e "$HOME/.ssh/id_rsa" ]; then
+	echo "SSH Key already exists"
+else
+	ssh-keygen -t rsa -b 8192
+fi
+}
+
+#GitHub config
+function gitconfig {
+	if git config --list | grep user.name > /dev/null 2>&1; then 
+		echo -e "\ngit already configured"
+	else
+		echo "Configuring global git config settings"
+		git config --global user.email "pc@stampedepress.org"
+		git config --global user.name "PeterChrz"
+	fi
+	echo " "
+}
+
 #Minecaft ARM launcher
 function minecraft {
 if [ -d "/opt/prism" ]; then
@@ -30,6 +51,7 @@ function flatpak {
         else
 		sudo pacman -S flatpak
 		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		echo " " 
 	fi
 }
 
@@ -42,6 +64,7 @@ function obsidian {
 		flatpak install flathub md.obsidian.Obsidian
 		#sudo pacman -S obsidian
 		echo "Run Obisidian: flatpak run md.obsidian.Obsidian"
+		git clone git@github.com:PeterChrz/obsidian.git $HOME/Documents/Obsidian
 	fi
 }
 
@@ -62,14 +85,19 @@ else
 	# Download the local Zulu tar for the specific CPU ARCH.
 	
 
-	# Extract the Zulu 21 tar. 
-	tar xzfv $HOME/bin/zulu21jdk-aarch64.tar.gz -C $HOME/bin/
-	mv $HOME/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64 $HOME/bin/zulu21
+	if [ "$arch" = "aarch64" ]; then	
 
-	# Check if the Azul Zulu 21 tar was in $HOME/bin
-	#if [ -f "$HOME/bin/zulu21jdk-aarch64.tar.gz"; then 
-	#       echo 	
+		# Extract the Zulu 21 tar. 
+		tar xzfv $HOME/bin/zulu21jdk-aarch64.tar.gz -C $HOME/bin/
+		mv $HOME/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64 $HOME/bin/zulu21
 
+	elif [ "$arch" = "x86_64" ]; then
+
+        	# Extract the Zulu 21 tar. 
+	        tar xzfv $HOME/bin/zulu21jdk.tar.gz -C $HOME/bin/
+        	mv $HOME/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64 $HOME/bin/zulu21
+	
+	fi
 
 	# Check for PATH update
 	if grep -q "zulu21/bin" "$HOME/.bashrc"; then
@@ -77,6 +105,7 @@ else
 	else
 	        echo "#Add Zulu21 JDK to PTH"
 	        echo 'export PATH="$PATH:$HOME/bin/zulu21/bin"' >> ~/.bashrc
+		bash
 	fi
 fi
 }
@@ -134,24 +163,29 @@ function install-s {
 	else 
 		echo "Invalid choice."
 	fi
+	
+	echo " "
 }
 
 
 ###############################
 #Run the installation Functions
 ###############################
-#
 
-#flatpak
+gitconfig
+
+install-s "SSH Key" "rsa"
+
+install-s "Minecraft Launcher" "minecraft"
+
+flatpak
+install-s "Obsidian" "obsidian"
+
+install-s "VS Code" "vscode"
+
 install-s "Zulu-21 JDK" "azul21"
-#install-s "Sublime Text" "sublime"
-#install-s "VS Code" "vscode"
-#install-s "JetBrains IntelliJ Community Edition" "jetbrains"
-#install-s "Minecraft Launcher" "minecraft"
-#install-s "Obsidian" "obsidian"
 
-#sublime
-#vscode
-#jetbrains
-#minecraft
-#obsidian
+install-s "JetBrains IntelliJ Community Edition" "jetbrains"
+
+install-s "Sublime Text" "sublime"
+
