@@ -62,9 +62,10 @@ function obsidian {
 	if pacman -Q | grep obsidian >/dev/null 2>&1; then
 		echo "Obsidian already installed" 
         else
-		flatpak install flathub md.obsidian.Obsidian
+		#flatpak install flathub md.obsidian.Obsidian
 		#sudo pacman -S obsidian
-		echo "Run Obisidian: flatpak run md.obsidian.Obsidian"
+		#echo "Run Obisidian: flatpak run md.obsidian.Obsidian"
+		sudo pacman -S obsidian
 		git clone git@github.com:PeterChrz/obsidian.git $HOME/Documents/Obsidian
 	fi
 }
@@ -83,9 +84,9 @@ function azul21 {
 if [ -d "$HOME/bin/zulu21" ]; then
 	echo "Zulu21 looks to be installed in $HOME/bin/zulu21"
 else
+	yay -S zulu-21-bin
 	# Download the local Zulu tar for the specific CPU ARCH.
-	
-
+:'
 	if [ "$arch" = "aarch64" ]; then	
 
 		# Extract the Zulu 21 tar. 
@@ -99,7 +100,8 @@ else
         	mv $HOME/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64 $HOME/bin/zulu21
 	
 	fi
-
+'
+:'
 	# Check for PATH update
 	if grep -q "zulu21/bin" "$HOME/.bashrc"; then
 		echo "Zulu21 already added to bashrc and PATH"
@@ -108,6 +110,7 @@ else
 	        echo 'export PATH="$PATH:$HOME/bin/zulu21/bin"' >> ~/.bashrc
 		bash
 	fi
+'
 fi
 }
 
@@ -184,7 +187,8 @@ install-s "SSH Key" "rsa"
 
 install-s "Minecraft Launcher" "minecraft"
 
-flatpak
+#flatpak
+
 install-s "Obsidian" "obsidian"
 
 install-s "VS Code" "vscode"
